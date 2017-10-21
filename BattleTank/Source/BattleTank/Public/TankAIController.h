@@ -20,10 +20,16 @@ private:
 	ATank* GetControlledTank() const;
 
 	ATank* GetPlayerTank() const;
+	
+	void AimTowardsCrosshair();
+
+	bool GetSigntRayHitLocation(FVector& OutHitLocation) const;
 
 public:
 
 	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
 	
 	
 };
