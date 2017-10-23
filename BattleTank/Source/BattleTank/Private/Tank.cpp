@@ -28,6 +28,12 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void ATank::SetTurretReference(UTankTurret* TurretToSet)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Tank SetTurretReference"));
+	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Tank SetBarrelReference"));

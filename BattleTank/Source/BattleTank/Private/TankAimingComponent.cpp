@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "TankTurret.h"
 #include "TankBarrel.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
@@ -23,6 +24,13 @@ void UTankAimingComponent::BeginPlay()
 
 	// ...
 	
+}
+
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	Turret = TurretToSet;
+	auto TurretLocation = Turret->GetComponentLocation();
+	UE_LOG(LogTemp, Warning, TEXT("Turret Location: %s"), *(TurretLocation.ToString()));
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
@@ -54,8 +62,8 @@ void UTankAimingComponent::AimAt(FVector AimLocation)
 
 	if (bHaveAimSolution)
 	{
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f: Aim solve found: %s"), Time, *(OutLaunchVelocity.ToString()));
+		//auto Time = GetWorld()->GetTimeSeconds();
+		//UE_LOG(LogTemp, Warning, TEXT("%f: Aim solve found: %s"), Time, *(OutLaunchVelocity.ToString()));
 
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
@@ -74,6 +82,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 	Barrel->Elevate(DeltaRotator.Pitch);
+	Turret->Rotate(DeltaRotator.Yaw);
 	//UE_LOG(LogTemp, Warning, TEXT("MoveBarrelTowards: %s"), *(AimDirection.ToString()));
 	//Barrel->Elevate(5);
 }
