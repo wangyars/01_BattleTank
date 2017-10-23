@@ -9,9 +9,9 @@ void UTankBarrel::Elevate(float RelativeSpeed)
 	//UE_LOG(LogTemp, Warning, TEXT("%f: Barrel Elevate: %f"), Time, RelativeSpeed);
 	RelativeSpeed = FMath::Clamp<float>(RelativeSpeed, -1, +1);
 	auto ElevationChange = RelativeSpeed * MaxDegreePerSecond * GetWorld()->DeltaTimeSeconds;
-	auto RawNewElevation = RelativeRotation.Pitch + ElevationChange;
-	auto Elevation = FMath::Clamp<float>(RawNewElevation, MinElevation, MaxElevation);
-	SetRelativeRotation(FRotator(RawNewElevation, 0, 0));
+	auto NewElevation = RelativeRotation.Pitch + ElevationChange;
+	auto Elevation = FMath::Clamp<float>(NewElevation, MinElevation, MaxElevation);
+	SetRelativeRotation(FRotator(Elevation, 0, 0));
 }
 
 
