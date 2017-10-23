@@ -57,7 +57,6 @@ void ATankAIController::AimTowardsCrosshair()
 	FVector HitLocation;
 }
 
-
 bool ATankAIController::GetSigntRayHitLocation(FVector& OutHitLocation) const
 {
 	return false;
