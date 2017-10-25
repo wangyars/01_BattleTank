@@ -18,13 +18,6 @@ class BATTLETANK_API ATankAIController : public AAIController
 	
 private:
 
-	ATank* GetControlledTank() const;
-
-	ATank* GetPlayerTank() const;
-	
-	void AimTowardsCrosshair();
-
-	bool GetSigntRayHitLocation(FVector& OutHitLocation) const;
 
 public:
 
